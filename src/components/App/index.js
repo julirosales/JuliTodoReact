@@ -1,10 +1,17 @@
+import React from "react";
 import "./App.css";
+import {Search} from "../Search"
+import {CreateButton} from "../CreateButton"
+import {Items} from "../Item"
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">holaaaa</header>
-    </div>
+    <React.Fragment>
+      <h1 className="App-header">Todo List React</h1>
+    <Search/>
+    <CreateButton/>
+    <Items/>
+    </React.Fragment>
   );
 }
 
