@@ -1,14 +1,13 @@
-import React from "react"
-import {BsFileEarmarkPlus} from "react-icons/bs"
-import "../App/App.css"
+import React from "react";
+import { BiListPlus } from "react-icons/bi";
+import "../App/App.css";
 
-function CreateButton(){
-
-    return(
-        <React.Fragment>
-        <BsFileEarmarkPlus className="pepe"/>
-        </React.Fragment>
-    )
+function CreateButton() {
+  return (
+    <React.Fragment>
+      <BiListPlus />
+    </React.Fragment>
+  );
 }
 
-export {CreateButton}
+export { CreateButton };

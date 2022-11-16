@@ -1,14 +1,23 @@
 import React from "react";
-import {BiSearchAlt2} from "react-icons/bi"
-function Search(){
-    
-    return(
-        <React.Fragment>
-        <input placeholder="Buscador" />
-        <BiSearchAlt2/>
-        </React.Fragment>
-    )
+import { BiSearchAlt2 } from "react-icons/bi";
+import { MdOutlineClear } from "react-icons/md";
+function Search() {
+  return (
+    <React.Fragment>
+      <form id="buscador">
+        <input
+          type="text"
+          className="buscador-barra"
+          placeholder="Buscador"
+          /*  name="buscador" */
+          required
+          minLength="1"
+        />
+        <BiSearchAlt2 />
+        <MdOutlineClear />
+      </form>
+    </React.Fragment>
+  );
 }
 
-
-export {Search}
+export { Search };
