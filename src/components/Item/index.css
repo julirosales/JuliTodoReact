@@ -1,0 +1,43 @@
+.container-tarea {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+    border-radius: 14px;
+    border-bottom: 2px solid rgba(61, 58, 58, 0.827);
+}
+.tituloLista{
+    text-decoration: underline;
+    padding: 15px;
+    text-decoration-color: darkgreen;
+    word-break: break-all;
+}
+.descripcionLista{
+    word-break: break-all;
+    text-align: center;
+}
+
+.divTarea{
+    width: 80%;
+    text-align: center;
+}
+
+.btnEdit, .btnBorrar {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.listNoFinalizada {
+    display: flex;
+    cursor: pointer;
+    width: 35px;
+    height: 35px;
+}
+
+@media (max-width: 700px){
+ .divTarea{
+    width: 80%;
+    padding: 10px;
+    font-size: 18px;
+}
+}

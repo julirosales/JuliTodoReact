@@ -2,13 +2,13 @@ import React from "react";
 import { BsCheck2All } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 import { CiTrash } from "react-icons/ci";
-import "./Item.css";
+import "../Item/index.css";
 
 function Items(props) {
   return (
     <React.Fragment>
-      <li className="li">
-        <BsCheck2All />
+      <div className="container-tarea">
+        <BsCheck2All className="listNoFinalizada"/>
         <div className="divTarea">
           <h4 className="tituloLista" maxLength="40">
             {props.titulo}
@@ -16,10 +16,10 @@ function Items(props) {
           <p className="descripcionLista"> {props.descripcion}</p>
         </div>
         <div>
-          <AiOutlineEdit />
-          <CiTrash />
+          <AiOutlineEdit className="btnEdit"/>
+          <CiTrash className="btnBorrar" />
         </div>
-      </li>
+      </div>
     </React.Fragment>
   );
 }
