@@ -1,11 +1,16 @@
 import React from "react";
 import { BiListPlus } from "react-icons/bi";
-import "../App/App.css";
+import "./CreateButton.css";
 
-function CreateButton() {
+function CreateButton(props) {
+  const onClickButtonAdd = () => {
+    props.setOpenModalForm((prevState) => !prevState);
+  };
   return (
     <React.Fragment>
-      <BiListPlus />
+      <div className="ContainerButtonCreate">
+        <BiListPlus className="buttonCreate" onClick={onClickButtonAdd} />
+      </div>
     </React.Fragment>
   );
 }

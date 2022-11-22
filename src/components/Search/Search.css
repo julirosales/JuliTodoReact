@@ -1,0 +1,47 @@
+
+.containerForm{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#buscador{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.buscadorBarra{
+    margin-top: 30px;
+    font-size: 21px;
+    text-align: center;
+    border-radius: 30px;
+    border: 2px solid #00000038;
+}
+
+
+.iconBuscar{    position: relative;
+    width: 25px;
+    height: 25px;
+    top: 30px;
+    right: 30px;
+    border-radius: 30px;
+    border: 2px solid #00000038;
+    align-items: center;}
+
+.iconBorrar{
+    display: flex;
+    justify-content: center;
+    width: 25px;
+    height: 25px;
+    position: relative;
+    top: 30px;
+    right: 30px;
+    border-radius: 30px;
+    border: 2px solid #00000038;
+    align-items: center;
+    cursor: pointer;
+}
+
+#notResult{
+    display: flex;
+    justify-content: center;
+}
