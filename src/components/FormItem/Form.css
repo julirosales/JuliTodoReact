@@ -19,12 +19,12 @@
     border-radius: 12px;
     border: 0px;
 }
-.container-close {
+/* .container-close {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
-}
+} */
 .descripcion, .descripcionEdit {
     width: 85%;
     padding: 10px;
@@ -45,7 +45,7 @@
     cursor: pointer;
     background-color: rgb(255 231 164);
 }
-.titulo, .tituloEdit {
+.titulo {
     width: 85%;
     padding: 10px;
     margin-bottom: 10px;
@@ -54,7 +54,11 @@
     margin-top: 10px;
     outline-color: rgb(215 181 87 / 88%);
 }
-
+.titulo-caja{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
 .iconClose {
     display: flex;
     justify-content: center;

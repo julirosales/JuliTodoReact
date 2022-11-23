@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef} from "react";
 import "./Form.css";
 
 function FormItem({
@@ -6,11 +6,17 @@ function FormItem({
   cargarTodoManual,
   todoAEditar,
   setTodoAEditar,
+  setTodoAEliminar,
+  todoAEliminar,
+  url,
+  
 }) {
+/*   const [validationTitulo, setValidationTitulo] = useState(""); */
+
   const onClickClose = () => {
     setOpenModalForm(false);
     setTodoAEditar(null);
- /*    setTodoAEliminar(null) */
+    /* setTodoAEliminar(null) */;
   };
   const tituloCapturado = useRef();
   const descripcionCapturada = useRef();
@@ -27,7 +33,7 @@ function FormItem({
       id: Date.now(),
     };
 
-    fetch("https://6348a6070b382d796c74f065.mockapi.io/api/v1/todos", {
+    fetch(url, {
       method: "POST",
       body: JSON.stringify(newItem),
       headers: { "Content-type": "application/json; charset=UTF-8" },
@@ -52,14 +58,11 @@ function FormItem({
     };
     console.log("TODO A EDITAR: ", todoAEditar);
 
-    fetch(
-      `https://6348a6070b382d796c74f065.mockapi.io/api/v1/todos/${todoAEditar.number}`,
-      {
-        method: "PUT",
-        body: JSON.stringify(newItem),
-        headers: { "Content-type": "application/json; charset=UTF-8" },
-      }
-    )
+    fetch(`${url}/${todoAEditar.number}`, {
+      method: "PUT",
+      body: JSON.stringify(newItem),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
       .then((response) => response.json())
       .then((data) => {
         cargarTodoManual(data);
@@ -69,34 +72,86 @@ function FormItem({
       .catch((err) => console.log(err));
   };
 
+  /* const onDeleteItem = (e) => {
+    e.preventDefault();
+    fetch(`${url}/${todoAEliminar.number}`, {
+      method: "DELETE",
+      body: JSON.stringify(todoAEliminar),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        deleteTodo(data);
+        onClickClose();
+      })
+      .catch((err) => console.log(err));
+  };
+ */
+  /* const onChangeValidation = (e) => {
+    setValidationTitulo(e.target.value);
+    console.log("entreeee", validationTitulo);
+    if (validationTitulo.length > 10) {
+      console.log("mayor a 10?");
+    } else {
+      console.log("menor a 1o");
+
+    }
+  }; */
   return (
     <React.Fragment>
-      <div className="container-caja-todo">
-        <div className="container-close">
-          <p className="titulo-caja">Nueva Tarea</p>
-        </div>
+      <form className="container-caja-todo">
+        <p className="titulo-caja">
+          {/* todoAEliminar
+            ? "¿Estas Seguro que deseas eliminar esta tarea?" */
+             todoAEditar
+            ? "Editar Tarea"
+            : "Nueva Tarea"}
+        </p>
         <input
           placeholder="Titulo"
           className="titulo"
-          required
           ref={tituloCapturado}
-          defaultValue={todoAEditar ? todoAEditar.titulo : ""}
+          defaultValue={
+           /*  todoAEliminar
+              ? todoAEliminar.titulo */
+               todoAEditar
+              ? todoAEditar.titulo
+              : ""
+          }
+          disabled={todoAEliminar ? true : false}
+          maxLength="40"
+          required={true}
+          /*    onChange={(e) => onChangeValidation(e)} */
+          label="Filled"
+          variant="filled"
         />
         <textarea
           className="descripcion"
           placeholder="Descripcion"
-          required
           ref={descripcionCapturada}
-          defaultValue={todoAEditar ? todoAEditar.descripcion : ""}
+          defaultValue={
+            /* todoAEliminar
+              ? todoAEliminar.descripcion */
+               todoAEditar
+              ? todoAEditar.descripcion
+              : ""
+          }
+          disabled={todoAEliminar ? true : false}
         ></textarea>
         <button
           className="button-add"
           type="submit"
-          onClick={todoAEditar ? onUpdateItem : onCargarNewItem}
+          onClick={
+            /* todoAEliminar
+              ? onDeleteItem */
+               todoAEditar
+              ? onUpdateItem
+              : onCargarNewItem
+          }
         >
-          {todoAEditar ? "Editar" : "Agregar"}
+          {/* todoAEliminar ? "Eliminar" */  todoAEditar ? "Editar" : "Agregar"}
         </button>
-      </div>
+      </form>
     </React.Fragment>
   );
 }
