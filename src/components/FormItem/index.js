@@ -1,4 +1,4 @@
-import React, { useRef} from "react";
+import React, { useRef } from "react";
 import "./Form.css";
 
 function FormItem({
@@ -9,17 +9,13 @@ function FormItem({
   setTodoAEliminar,
   todoAEliminar,
   url,
-  
+  onClickClose,
 }) {
-/*   const [validationTitulo, setValidationTitulo] = useState(""); */
+  /*   const [validationTitulo, setValidationTitulo] = useState(""); */
 
-  const onClickClose = () => {
-    setOpenModalForm(false);
-    setTodoAEditar(null);
-    /* setTodoAEliminar(null) */;
-  };
   const tituloCapturado = useRef();
   const descripcionCapturada = useRef();
+ 
 
   const onCargarNewItem = (e) => {
     e.preventDefault();
@@ -101,22 +97,20 @@ function FormItem({
     <React.Fragment>
       <form className="container-caja-todo">
         <p className="titulo-caja">
-          {/* todoAEliminar
+          {
+            /* todoAEliminar
             ? "¿Estas Seguro que deseas eliminar esta tarea?" */
-             todoAEditar
-            ? "Editar Tarea"
-            : "Nueva Tarea"}
+            todoAEditar ? "Editar Tarea" : "Nueva Tarea"
+          }
         </p>
         <input
           placeholder="Titulo"
           className="titulo"
           ref={tituloCapturado}
           defaultValue={
-           /*  todoAEliminar
+            /*  todoAEliminar
               ? todoAEliminar.titulo */
-               todoAEditar
-              ? todoAEditar.titulo
-              : ""
+            todoAEditar ? todoAEditar.titulo : ""
           }
           disabled={todoAEliminar ? true : false}
           maxLength="40"
@@ -132,24 +126,16 @@ function FormItem({
           defaultValue={
             /* todoAEliminar
               ? todoAEliminar.descripcion */
-               todoAEditar
-              ? todoAEditar.descripcion
-              : ""
+            todoAEditar ? todoAEditar.descripcion : ""
           }
           disabled={todoAEliminar ? true : false}
         ></textarea>
         <button
           className="button-add"
           type="submit"
-          onClick={
-            /* todoAEliminar
-              ? onDeleteItem */
-               todoAEditar
-              ? onUpdateItem
-              : onCargarNewItem
-          }
+          onClick={todoAEditar ? onUpdateItem : onCargarNewItem}
         >
-          {/* todoAEliminar ? "Eliminar" */  todoAEditar ? "Editar" : "Agregar"}
+          {todoAEditar ? "Editar" : "Agregar"}
         </button>
       </form>
     </React.Fragment>

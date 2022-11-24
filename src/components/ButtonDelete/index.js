@@ -1,4 +1,4 @@
-function ButtonDeleteItem(url, todoAEliminar, deleteTodo, onClickClose,setOpenModalForm) {
+function ButtonDeleteItem({ url, todoAEliminar, deleteTodo, onClickClose }) {
   const onDeleteItem = (e) => {
     e.preventDefault();
     fetch(`${url}/${todoAEliminar.number}`, {
@@ -13,12 +13,10 @@ function ButtonDeleteItem(url, todoAEliminar, deleteTodo, onClickClose,setOpenMo
       })
       .catch((err) => console.log(err));
   };
- 
+
   return (
     <>
-      <form>
-        <button onClick={onDeleteItem}>Eliminar</button>
-      </form>
+      <button onClick={onDeleteItem}>ELIMINAR</button>
     </>
   );
 }

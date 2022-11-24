@@ -2,9 +2,19 @@ import React from "react";
 import { BsCheck2All } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 import { CiTrash } from "react-icons/ci";
+
 import "../Item/index.css";
 
-function Items({ todo, setTodoAEditar ,setTodoAEliminar}) {
+function Items({
+  todo,
+  setTodoAEditar,
+  setTodoAEliminar,
+  setOpenModalEliminar,
+}) {
+  const onClickDelete = () => {
+    setOpenModalEliminar((prevState) => !prevState);
+  };
+
   return (
     <React.Fragment>
       <div className="container-tarea">
@@ -20,7 +30,13 @@ function Items({ todo, setTodoAEditar ,setTodoAEliminar}) {
             className="btnEdit"
             onClick={() => setTodoAEditar(todo)}
           />
-          <CiTrash className="btnBorrar" onClick={()=>setTodoAEliminar(todo)} />
+          <CiTrash
+            className="btnBorrar"
+            onClick={() => {
+              setTodoAEliminar(todo);
+              onClickDelete();
+            }}
+          />
         </div>
       </div>
     </React.Fragment>

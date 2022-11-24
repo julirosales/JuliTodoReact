@@ -7,7 +7,7 @@ import { FormItem } from "../FormItem";
 import { ListItems } from "../ListItems";
 import "../Loading/index.css";
 import { Modal } from "../ModalPortal";
-import { ButtonDeleteItem } from "../ButtonDelete";
+import { ModalDeleteOpen } from "../ModalPortal/ModalDeleteOpen";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -17,17 +17,21 @@ function App() {
   const [todoAEditar, setTodoAEditar] = useState(null);
   const [todoAEliminar, setTodoAEliminar] = useState(null);
   const [openModalForm, setOpenModalForm] = useState(false);
-  const [tituloABorrar, setTituloABorrar] = useState("");
-
+  const [openModalEliminar, setOpenModalEliminar] = useState(false);
   const searchMode = filteredTodos.length > 0 || searchValue.length > 0;
   const todos = searchMode ? filteredTodos : arrayTodo;
   const url = "https://6348a6070b382d796c74f065.mockapi.io/api/v1/todos";
 
   useEffect(() => {
-    if (todoAEditar || todoAEliminar) {
+    if (todoAEditar) {
       setOpenModalForm(true);
     }
-  }, [todoAEditar, todoAEliminar]);
+  }, [todoAEditar]);
+  useEffect(() => {
+    if (todoAEliminar) {
+      setOpenModalEliminar(true);
+    }
+  }, [todoAEliminar]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -83,14 +87,14 @@ function App() {
       setArrayTodo(arrTemp);
     }
   };
+
   const onClickClose = () => {
     setOpenModalForm(false);
     setTodoAEditar(null);
     setTodoAEliminar(null);
+    setOpenModalEliminar(false);
   };
-  const onClickButtonDelete = () => {
-    setOpenModalForm((prevState) => !prevState);
-  };
+
   return (
     <React.Fragment>
       <h1 className="App-header">Todo List React</h1>
@@ -110,6 +114,7 @@ function App() {
               todo={todo}
               setTodoAEditar={setTodoAEditar}
               setTodoAEliminar={setTodoAEliminar}
+              setOpenModalEliminar={setOpenModalEliminar}
             />
           );
         })}
@@ -119,7 +124,7 @@ function App() {
           setOpenModalForm={setOpenModalForm}
           setTodoAEditar={setTodoAEditar}
           setTodoAEliminar={setTodoAEliminar}
-          onClickClose={onClickClose}
+          onClickClose={() => onClickClose()}
         >
           <FormItem
             setOpenModalForm={setOpenModalForm}
@@ -128,20 +133,26 @@ function App() {
             todoAEditar={todoAEditar}
             setTodoAEliminar={setTodoAEliminar}
             todoAEliminar={todoAEliminar}
-            onClickClose={onClickClose}
+            onClickClose={() => onClickClose()}
             url={url}
             deleteTodo={deleteTodo}
-            tituloABorrar={tituloABorrar}
-            setTituloABorrar={setTituloABorrar}
           />
         </Modal>
       )}
-      {openModalForm && (
-        <Modal onClickButtonDelete={onClickButtonDelete}>
-          <ButtonDeleteItem
-            tituloABorrar={tituloABorrar}
-            setTituloABorrar={setTituloABorrar}
-          />
+      {openModalEliminar && (
+        <Modal
+          setOpenModalForm={setOpenModalForm}
+          setTodoAEditar={setTodoAEditar}
+          setTodoAEliminar={setTodoAEliminar}
+          onClickClose={() => onClickClose()}
+          setOpenModalEliminar={setOpenModalEliminar}
+        >
+          <ModalDeleteOpen
+            url={url}
+            todoAEliminar={todoAEliminar}
+            deleteTodo={deleteTodo}
+            onClickClose={onClickClose}
+          ></ModalDeleteOpen>
         </Modal>
       )}
     </React.Fragment>
