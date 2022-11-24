@@ -1,7 +1,7 @@
 import React from "react";
-import { ButtonDeleteItem } from "../ButtonDelete";
+import { ButtonDeleteItem } from "../../ButtonDelete";
 
-function ModalDeleteOpen({ url, todoAEliminar, deleteTodo, onClickClose }) {
+function DeleteOpen({ url, todoAEliminar, deleteTodo, onClickClose }) {
   return (
     <>
       <form>
@@ -11,10 +11,11 @@ function ModalDeleteOpen({ url, todoAEliminar, deleteTodo, onClickClose }) {
           url={url}
           deleteTodo={deleteTodo}
           onClickClose={onClickClose}
+          todoAEliminar={todoAEliminar}
         />
       </form>
     </>
   );
 }
 
-export { ModalDeleteOpen };
+export { DeleteOpen };

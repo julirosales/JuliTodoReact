@@ -3,11 +3,11 @@ import "./App.css";
 import { Search } from "../Search";
 import { CreateButton } from "../CreateButton";
 import { Items } from "../Item";
-import { FormItem } from "../FormItem";
+import { FormItem } from "../ModalPortal/FormItemOpen";
 import { ListItems } from "../ListItems";
 import "../Loading/index.css";
 import { Modal } from "../ModalPortal";
-import { ModalDeleteOpen } from "../ModalPortal/ModalDeleteOpen";
+import { DeleteOpen } from "../ModalPortal/DeleteOpen";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -121,38 +121,27 @@ function App() {
       </ListItems>
       {openModalForm && (
         <Modal
-          setOpenModalForm={setOpenModalForm}
-          setTodoAEditar={setTodoAEditar}
-          setTodoAEliminar={setTodoAEliminar}
           onClickClose={() => onClickClose()}
         >
           <FormItem
-            setOpenModalForm={setOpenModalForm}
             cargarTodoManual={cargarTodoManual}
-            setTodoAEditar={setTodoAEditar}
             todoAEditar={todoAEditar}
-            setTodoAEliminar={setTodoAEliminar}
             todoAEliminar={todoAEliminar}
             onClickClose={() => onClickClose()}
             url={url}
-            deleteTodo={deleteTodo}
           />
         </Modal>
       )}
       {openModalEliminar && (
         <Modal
-          setOpenModalForm={setOpenModalForm}
-          setTodoAEditar={setTodoAEditar}
-          setTodoAEliminar={setTodoAEliminar}
           onClickClose={() => onClickClose()}
-          setOpenModalEliminar={setOpenModalEliminar}
         >
-          <ModalDeleteOpen
+          <DeleteOpen
             url={url}
             todoAEliminar={todoAEliminar}
             deleteTodo={deleteTodo}
             onClickClose={onClickClose}
-          ></ModalDeleteOpen>
+          ></DeleteOpen>
         </Modal>
       )}
     </React.Fragment>

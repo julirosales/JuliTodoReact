@@ -2,21 +2,16 @@ import React, { useRef } from "react";
 import "./Form.css";
 
 function FormItem({
-  setOpenModalForm,
   cargarTodoManual,
   todoAEditar,
-  setTodoAEditar,
-  setTodoAEliminar,
   todoAEliminar,
   url,
   onClickClose,
 }) {
-  /*   const [validationTitulo, setValidationTitulo] = useState(""); */
 
   const tituloCapturado = useRef();
   const descripcionCapturada = useRef();
- 
-
+  
   const onCargarNewItem = (e) => {
     e.preventDefault();
     const valueTitulo = tituloCapturado.current.value;
@@ -68,38 +63,11 @@ function FormItem({
       .catch((err) => console.log(err));
   };
 
-  /* const onDeleteItem = (e) => {
-    e.preventDefault();
-    fetch(`${url}/${todoAEliminar.number}`, {
-      method: "DELETE",
-      body: JSON.stringify(todoAEliminar),
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        deleteTodo(data);
-        onClickClose();
-      })
-      .catch((err) => console.log(err));
-  };
- */
-  /* const onChangeValidation = (e) => {
-    setValidationTitulo(e.target.value);
-    console.log("entreeee", validationTitulo);
-    if (validationTitulo.length > 10) {
-      console.log("mayor a 10?");
-    } else {
-      console.log("menor a 1o");
-
-    }
-  }; */
   return (
     <React.Fragment>
       <form className="container-caja-todo">
         <p className="titulo-caja">
           {
-            /* todoAEliminar
-            ? "¿Estas Seguro que deseas eliminar esta tarea?" */
             todoAEditar ? "Editar Tarea" : "Nueva Tarea"
           }
         </p>
@@ -108,14 +76,11 @@ function FormItem({
           className="titulo"
           ref={tituloCapturado}
           defaultValue={
-            /*  todoAEliminar
-              ? todoAEliminar.titulo */
             todoAEditar ? todoAEditar.titulo : ""
           }
           disabled={todoAEliminar ? true : false}
           maxLength="40"
           required={true}
-          /*    onChange={(e) => onChangeValidation(e)} */
           label="Filled"
           variant="filled"
         />
@@ -124,8 +89,6 @@ function FormItem({
           placeholder="Descripcion"
           ref={descripcionCapturada}
           defaultValue={
-            /* todoAEliminar
-              ? todoAEliminar.descripcion */
             todoAEditar ? todoAEditar.descripcion : ""
           }
           disabled={todoAEliminar ? true : false}
