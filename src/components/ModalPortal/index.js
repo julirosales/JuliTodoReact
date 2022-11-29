@@ -1,14 +1,10 @@
 import ReactDOM from "react-dom";
 import "./Modal.css";
 import { MdOutlineClear } from "react-icons/md";
-import {ButtonModal} from "../ButtonModal/index"
-import {ButtonDeleteItem} from "../ButtonDelete"
+/* import { ButtonModal } from "../ButtonModal/index"; */
+/* import {ButtonDeleteItem} from "../ButtonDelete" */
 
-function Modal({
-  children,
-  onClickClose
-}) {
- 
+function Modal({ children, onClickClose, button }) {
   //en reactDom Portal le podemos enviar todo lo que querramos y como segundo parametros que es el nodo de html donde vamos a mandar a nuestro hijo de nuestro modal
   return ReactDOM.createPortal(
     <div className="modal-container">
@@ -21,9 +17,7 @@ function Modal({
           />
         </div>
         {children}
-        <ButtonModal>
-         <ButtonDeleteItem/>
-        </ButtonModal>
+        {button}
       </div>
     </div>,
     document.getElementById("modal")

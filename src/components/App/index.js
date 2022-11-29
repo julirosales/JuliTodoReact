@@ -8,6 +8,7 @@ import { ListItems } from "../ListItems";
 import "../Loading/index.css";
 import { Modal } from "../ModalPortal";
 import { DeleteOpen } from "../ModalPortal/DeleteOpen";
+import { ButtonDeleteItem } from "../ButtonDelete";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ function App() {
   const [todoAEliminar, setTodoAEliminar] = useState(null);
   const [openModalForm, setOpenModalForm] = useState(false);
   const [openModalEliminar, setOpenModalEliminar] = useState(false);
+  /*  const [editTituloValue, setEditTituloValue] = useState(null); */
   const searchMode = filteredTodos.length > 0 || searchValue.length > 0;
   const todos = searchMode ? filteredTodos : arrayTodo;
   const url = "https://6348a6070b382d796c74f065.mockapi.io/api/v1/todos";
@@ -122,6 +124,15 @@ function App() {
       {openModalForm && (
         <Modal
           onClickClose={() => onClickClose()}
+          /* button={
+            <ButtonEditItem
+              cargarTodoManual={cargarTodoManual}
+              todoAEditar={todoAEditar}
+              url={url}
+              onClickClose={onClickClose}
+              editTituloValue={editTituloValue}
+            />
+          } */
         >
           <FormItem
             cargarTodoManual={cargarTodoManual}
@@ -129,11 +140,20 @@ function App() {
             todoAEliminar={todoAEliminar}
             onClickClose={() => onClickClose()}
             url={url}
+            /* setEditTituloValue={setEditTituloValue} */
           />
         </Modal>
       )}
       {openModalEliminar && (
         <Modal
+          button={
+            <ButtonDeleteItem
+              url={url}
+              deleteTodo={deleteTodo}
+              onClickClose={onClickClose}
+              todoAEliminar={todoAEliminar}
+            />
+          }
           onClickClose={() => onClickClose()}
         >
           <DeleteOpen
