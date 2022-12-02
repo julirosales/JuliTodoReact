@@ -1,5 +1,6 @@
 import React, { useRef } from "react";
-import "./Form.css";
+import { ButtonModal } from "../ButtonModal";
+import "../FormItemOpen/Form.css"
 
 function FormItem({
   cargarTodoManual,
@@ -93,13 +94,14 @@ function FormItem({
           }
           disabled={todoAEliminar ? true : false}
         ></textarea>
-        <button
+        {/* <button
           className="button-add"
           type="submit"
           onClick={todoAEditar ? onUpdateItem : onCargarNewItem}
         >
           {todoAEditar ? "Editar" : "Agregar"}
-        </button>
+        </button> */}
+        <ButtonModal submit={"submit"}className={"button-add"}text={todoAEditar ? "Editar" : "Agregar"} onClick={todoAEditar ? onUpdateItem : onCargarNewItem}/>
       </form>
     </React.Fragment>
   );

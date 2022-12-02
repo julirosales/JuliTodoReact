@@ -1,5 +1,6 @@
 import React from "react";
-import { ButtonDeleteItem } from "../../ButtonDelete";
+import { ButtonModal } from "../ButtonModal";
+import "./index.css"
 
 function DeleteOpen({ url, todoAEliminar, deleteTodo, onClickClose }) {
   const onDeleteItem = (e) => {
@@ -18,10 +19,10 @@ function DeleteOpen({ url, todoAEliminar, deleteTodo, onClickClose }) {
   };
   return (
     <>
-      <form>
+      <form className="form-delete-item">
         <p>Estas Seguro que deseas eliminar la tarea :</p>
-        <p>{todoAEliminar.titulo}</p>
-        <ButtonDeleteItem onclick={onDeleteItem} text={"JULIETA"} />
+        <p className="text-delete">{todoAEliminar.titulo}</p>
+        <ButtonModal type={"submit"} onClick={onDeleteItem} text={"ELIMINAR"} className={"button-delete"}></ButtonModal>
       </form>
     </>
   );

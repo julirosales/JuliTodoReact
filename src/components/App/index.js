@@ -8,7 +8,6 @@ import { ListItems } from "../ListItems";
 import "../Loading/index.css";
 import { Modal } from "../ModalPortal";
 import { DeleteOpen } from "../ModalPortal/DeleteOpen";
-import { ButtonDeleteItem } from "../ButtonDelete";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -124,15 +123,6 @@ function App() {
       {openModalForm && (
         <Modal
           onClickClose={() => onClickClose()}
-          /* button={
-            <ButtonEditItem
-              cargarTodoManual={cargarTodoManual}
-              todoAEditar={todoAEditar}
-              url={url}
-              onClickClose={onClickClose}
-              editTituloValue={editTituloValue}
-            />
-          } */
         >
           <FormItem
             cargarTodoManual={cargarTodoManual}
@@ -140,20 +130,12 @@ function App() {
             todoAEliminar={todoAEliminar}
             onClickClose={() => onClickClose()}
             url={url}
-            /* setEditTituloValue={setEditTituloValue} */
+        
           />
         </Modal>
       )}
       {openModalEliminar && (
         <Modal
-          button={
-            <ButtonDeleteItem
-              url={url}
-              deleteTodo={deleteTodo}
-              onClickClose={onClickClose}
-              todoAEliminar={todoAEliminar}
-            />
-          }
           onClickClose={() => onClickClose()}
         >
           <DeleteOpen

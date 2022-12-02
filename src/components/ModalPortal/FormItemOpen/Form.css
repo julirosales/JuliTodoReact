@@ -36,7 +36,7 @@
     margin-top: 10px;
     outline-color: rgb(215 181 87 / 88%);
 }
-.button-add, .button-modificar {
+/* .button-add, .button-modificar {
     width: 40%;
     height: 35px;
     font-family: 'Indie Flower', sans-serif;
@@ -44,7 +44,7 @@
     border: 0px;
     cursor: pointer;
     background-color: rgb(255 231 164);
-}
+} */
 .titulo {
     width: 85%;
     padding: 10px;
