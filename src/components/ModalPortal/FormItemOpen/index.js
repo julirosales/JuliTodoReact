@@ -5,7 +5,6 @@ import "../FormItemOpen/Form.css"
 function FormItem({
   cargarTodoManual,
   todoAEditar,
-  todoAEliminar,
   url,
   onClickClose,
 }) {
@@ -79,7 +78,7 @@ function FormItem({
           defaultValue={
             todoAEditar ? todoAEditar.titulo : ""
           }
-          disabled={todoAEliminar ? true : false}
+          
           maxLength="40"
           required={true}
           label="Filled"
@@ -92,16 +91,8 @@ function FormItem({
           defaultValue={
             todoAEditar ? todoAEditar.descripcion : ""
           }
-          disabled={todoAEliminar ? true : false}
         ></textarea>
-        {/* <button
-          className="button-add"
-          type="submit"
-          onClick={todoAEditar ? onUpdateItem : onCargarNewItem}
-        >
-          {todoAEditar ? "Editar" : "Agregar"}
-        </button> */}
-        <ButtonModal submit={"submit"}className={"button-add"}text={todoAEditar ? "Editar" : "Agregar"} onClick={todoAEditar ? onUpdateItem : onCargarNewItem}/>
+        <ButtonModal  submit={"submit"}className={"button-add"}text={todoAEditar ? "Editar" : "Agregar"} onClick={todoAEditar ? onUpdateItem : onCargarNewItem}/>
       </form>
     </React.Fragment>
   );

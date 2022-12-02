@@ -1,11 +1,4 @@
 .cargando {
-    /* border: 5px solid rgba(254, 188, 7, 0.524);
-    border-radius: 50%;
-    border-left-color: transparent;
-    width: 80px;
-    height: 80px;
-    animation: giro .7s linear infinite;
-    margin:auto; */
     box-sizing: border-box;
     width: 60px;
     height: 60px;
@@ -13,7 +6,6 @@
     border:5px solid rgba(255,212,0);
     border-top-color:rgb(204,221,231);
     border-bottom-color: rgb(18,169,127);
-    /* border-left-color: rgba(50,86,193); */
     border-radius: 50%;
     animation: giro 4s linear infinite;
   }

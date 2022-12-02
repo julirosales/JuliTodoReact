@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import "./App.css";
 import { Search } from "../Search";
 import { CreateButton } from "../CreateButton";
 import { Items } from "../Item";
 import { FormItem } from "../ModalPortal/FormItemOpen";
 import { ListItems } from "../ListItems";
-import "../Loading/index.css";
 import { Modal } from "../ModalPortal";
 import { DeleteOpen } from "../ModalPortal/DeleteOpen";
+import "./App.css";
+import "../Loading/index.css";
+
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -18,6 +19,7 @@ function App() {
   const [todoAEliminar, setTodoAEliminar] = useState(null);
   const [openModalForm, setOpenModalForm] = useState(false);
   const [openModalEliminar, setOpenModalEliminar] = useState(false);
+  const [disabledButton,setDisabledButton] = useState(false)
   /*  const [editTituloValue, setEditTituloValue] = useState(null); */
   const searchMode = filteredTodos.length > 0 || searchValue.length > 0;
   const todos = searchMode ? filteredTodos : arrayTodo;
@@ -94,6 +96,7 @@ function App() {
     setTodoAEditar(null);
     setTodoAEliminar(null);
     setOpenModalEliminar(false);
+    setDisabledButton(false)
   };
 
   return (
@@ -139,10 +142,14 @@ function App() {
           onClickClose={() => onClickClose()}
         >
           <DeleteOpen
+          loading={loading}
+           setLoading={ setLoading}
             url={url}
             todoAEliminar={todoAEliminar}
             deleteTodo={deleteTodo}
             onClickClose={onClickClose}
+            disabledButton={disabledButton}
+            setDisabledButton={setDisabledButton}
           ></DeleteOpen>
         </Modal>
       )}
