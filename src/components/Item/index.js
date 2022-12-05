@@ -10,15 +10,24 @@ function Items({
   setTodoAEditar,
   setTodoAEliminar,
   setOpenModalEliminar,
+  setTareaFinalizada,
+  tareaFinalizada,
 }) {
   const onClickDelete = () => {
     setOpenModalEliminar((prevState) => !prevState);
+  };
+  const onClickTareaFinalizada = () => {
+    setTareaFinalizada((prevState) => !prevState);
+    console.log("esta es", todo.id);
   };
 
   return (
     <React.Fragment>
       <div className="container-tarea">
-        <BsCheck2All className="listNoFinalizada" />
+        <BsCheck2All
+          onClick={onClickTareaFinalizada}
+          className={tareaFinalizada ? "tareaFinalizada" : "tareaNoFinalizada"}
+        />
         <div className="divTarea">
           <h4 className="tituloLista" maxLength="40">
             {todo.titulo}

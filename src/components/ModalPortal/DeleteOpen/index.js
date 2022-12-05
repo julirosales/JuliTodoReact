@@ -1,14 +1,19 @@
 import React from "react";
 import { ButtonModal } from "../ButtonModal";
-import "./index.css"
-import "../../Loading/index.css"
+import "./index.css";
+import "../../Loading/index.css";
 
-function DeleteOpen({ url, todoAEliminar, deleteTodo, onClickClose,disabledButton,
-  setDisabledButton}) {
-
-
+function DeleteOpen({
+  url,
+  todoAEliminar,
+  deleteTodo,
+  onClickClose,
+  disabledButton,
+  setDisabledButton,
+}) {
   const onDeleteItem = (e) => {
     e.preventDefault();
+    setDisabledButton(true);
     fetch(`${url}/${todoAEliminar.number}`, {
       method: "DELETE",
       body: JSON.stringify(todoAEliminar),
@@ -16,7 +21,7 @@ function DeleteOpen({ url, todoAEliminar, deleteTodo, onClickClose,disabledButto
     })
       .then((response) => response.json())
       .then((data) => {
-        setDisabledButton(true)
+        setDisabledButton(false);
         deleteTodo(data);
         onClickClose();
       })
@@ -28,7 +33,13 @@ function DeleteOpen({ url, todoAEliminar, deleteTodo, onClickClose,disabledButto
         <p>Estas Seguro que deseas eliminar la tarea :</p>
         <p className="text-delete">{todoAEliminar.titulo}</p>
 
-       <ButtonModal disabled={disabledButton} type={"submit"} onClick={onDeleteItem} text={"ELIMINAR"} className={"button-delete"}></ButtonModal>
+        <ButtonModal
+          disabled={disabledButton}
+          type={"submit"}
+          onClick={onDeleteItem}
+          text={"ELIMINAR"}
+          className={"button-delete"}
+        ></ButtonModal>
       </form>
     </>
   );

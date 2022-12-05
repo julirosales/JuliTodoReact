@@ -9,7 +9,6 @@ import { DeleteOpen } from "../ModalPortal/DeleteOpen";
 import "./App.css";
 import "../Loading/index.css";
 
-
 function App() {
   const [loading, setLoading] = useState(true);
   const [arrayTodo, setArrayTodo] = useState([]);
@@ -19,7 +18,8 @@ function App() {
   const [todoAEliminar, setTodoAEliminar] = useState(null);
   const [openModalForm, setOpenModalForm] = useState(false);
   const [openModalEliminar, setOpenModalEliminar] = useState(false);
-  const [disabledButton,setDisabledButton] = useState(false)
+  const [disabledButton, setDisabledButton] = useState(false);
+  const [tareaFinalizada, setTareaFinalizada] = useState(false);
   /*  const [editTituloValue, setEditTituloValue] = useState(null); */
   const searchMode = filteredTodos.length > 0 || searchValue.length > 0;
   const todos = searchMode ? filteredTodos : arrayTodo;
@@ -96,7 +96,7 @@ function App() {
     setTodoAEditar(null);
     setTodoAEliminar(null);
     setOpenModalEliminar(false);
-    setDisabledButton(false)
+    /* setDisabledButton(false); */
   };
 
   return (
@@ -119,37 +119,36 @@ function App() {
               setTodoAEditar={setTodoAEditar}
               setTodoAEliminar={setTodoAEliminar}
               setOpenModalEliminar={setOpenModalEliminar}
+              tareaFinalizada={tareaFinalizada}
+              setTareaFinalizada={setTareaFinalizada}
             />
           );
         })}
       </ListItems>
       {openModalForm && (
-        <Modal
-          onClickClose={() => onClickClose()}
-        >
+        <Modal onClickClose={() => onClickClose()}>
           <FormItem
+            url={url}
             cargarTodoManual={cargarTodoManual}
             todoAEditar={todoAEditar}
             todoAEliminar={todoAEliminar}
+            disabledButton={disabledButton}
+            setDisabledButton={setDisabledButton}
             onClickClose={() => onClickClose()}
-            url={url}
-        
           />
         </Modal>
       )}
       {openModalEliminar && (
-        <Modal
-          onClickClose={() => onClickClose()}
-        >
+        <Modal onClickClose={() => onClickClose()}>
           <DeleteOpen
-          loading={loading}
-           setLoading={ setLoading}
+            loading={loading}
+            setLoading={setLoading}
             url={url}
             todoAEliminar={todoAEliminar}
             deleteTodo={deleteTodo}
-            onClickClose={onClickClose}
             disabledButton={disabledButton}
             setDisabledButton={setDisabledButton}
+            onClickClose={onClickClose}
           ></DeleteOpen>
         </Modal>
       )}
