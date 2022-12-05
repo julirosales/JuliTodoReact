@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import { BsCheck2All } from "react-icons/bs";
 import { AiOutlineEdit } from "react-icons/ai";
 import { CiTrash } from "react-icons/ci";
@@ -10,24 +10,46 @@ function Items({
   setTodoAEditar,
   setTodoAEliminar,
   setOpenModalEliminar,
-  setTareaFinalizada,
-  tareaFinalizada,
+  cargarTodoManual,
+  url,
+
 }) {
   const onClickDelete = () => {
     setOpenModalEliminar((prevState) => !prevState);
   };
-  const onClickTareaFinalizada = () => {
-    setTareaFinalizada((prevState) => !prevState);
-    console.log("esta es", todo.id);
-  };
+  const tildeCapturado = useRef();
 
+  const onClickTareaFinalizada = (todo) => {
+    const newItem = {
+      ...todo,
+      estado: !todo.estado,
+    };
+
+    fetch(`${url}/${todo.number}`, {
+      method: "PUT",
+      body: JSON.stringify(newItem),
+      headers: { "Content-type": "application/json; charset=UTF-8" },
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        cargarTodoManual(data);
+      })
+      .catch((err) => console.log(err));
+  };
   return (
     <React.Fragment>
       <div className="container-tarea">
-        <BsCheck2All
-          onClick={onClickTareaFinalizada}
-          className={tareaFinalizada ? "tareaFinalizada" : "tareaNoFinalizada"}
-        />
+        <div
+          ref={tildeCapturado}
+          id={todo.id}
+          onClick={() => {
+            // setTareaFinalizada(todo);
+            onClickTareaFinalizada(todo);
+          }}
+          className={todo.estado ? "tareaNoFinalizada" : "tareaFinalizada"}
+        >
+          <BsCheck2All />
+        </div>
         <div className="divTarea">
           <h4 className="tituloLista" maxLength="40">
             {todo.titulo}

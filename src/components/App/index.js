@@ -19,7 +19,6 @@ function App() {
   const [openModalForm, setOpenModalForm] = useState(false);
   const [openModalEliminar, setOpenModalEliminar] = useState(false);
   const [disabledButton, setDisabledButton] = useState(false);
-  const [tareaFinalizada, setTareaFinalizada] = useState(false);
   /*  const [editTituloValue, setEditTituloValue] = useState(null); */
   const searchMode = filteredTodos.length > 0 || searchValue.length > 0;
   const todos = searchMode ? filteredTodos : arrayTodo;
@@ -81,6 +80,7 @@ function App() {
       setArrayTodo(arrTemp);
     }
   };
+
   const deleteTodo = (todo) => {
     const todoIndex = arrayTodo.map((t) => t.id).indexOf(todo.id);
     if (todoIndex > -1) {
@@ -119,8 +119,8 @@ function App() {
               setTodoAEditar={setTodoAEditar}
               setTodoAEliminar={setTodoAEliminar}
               setOpenModalEliminar={setOpenModalEliminar}
-              tareaFinalizada={tareaFinalizada}
-              setTareaFinalizada={setTareaFinalizada}
+              url={url}
+              cargarTodoManual={cargarTodoManual}
             />
           );
         })}

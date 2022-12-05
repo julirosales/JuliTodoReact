@@ -32,6 +32,7 @@
     cursor: pointer;
     width: 35px;
     height: 35px;
+    font-size: 30px;
 }
 
 .tareaFinalizada{  
@@ -39,7 +40,8 @@
     cursor: pointer;
     width: 35px;
     height: 35px;
-    color:green
+    font-size: 30px;
+    color:rgb(79, 241, 79)
   }
 
 
