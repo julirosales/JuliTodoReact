@@ -11,6 +11,7 @@ import "../Loading/index.css";
 
 function App() {
   const [loading, setLoading] = useState(true);
+  const [cargandoTilde,setCargandoTilde]=useState(false)
   const [arrayTodo, setArrayTodo] = useState([]);
   const [filteredTodos, setFilteredTodos] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -121,6 +122,7 @@ function App() {
               setOpenModalEliminar={setOpenModalEliminar}
               url={url}
               cargarTodoManual={cargarTodoManual}
+              cargandoTilde={cargandoTilde}setCargandoTilde={setCargandoTilde}
             />
           );
         })}

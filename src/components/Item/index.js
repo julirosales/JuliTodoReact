@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { BsCheck2All } from "react-icons/bs";
-import { AiOutlineEdit } from "react-icons/ai";
+import { AiOutlineEdit/* , AiOutlineLoading */ } from "react-icons/ai";
 import { CiTrash } from "react-icons/ci";
 
 import "../Item/index.css";
@@ -12,6 +12,7 @@ function Items({
   setOpenModalEliminar,
   cargarTodoManual,
   url,
+  cargandoTilde,setCargandoTilde
 
 }) {
   const onClickDelete = () => {
@@ -30,9 +31,12 @@ function Items({
       body: JSON.stringify(newItem),
       headers: { "Content-type": "application/json; charset=UTF-8" },
     })
+      .then(setCargandoTilde(true))
       .then((response) => response.json())
       .then((data) => {
+        setCargandoTilde(false)
         cargarTodoManual(data);
+        
       })
       .catch((err) => console.log(err));
   };
@@ -43,18 +47,17 @@ function Items({
           ref={tildeCapturado}
           id={todo.id}
           onClick={() => {
-            // setTareaFinalizada(todo);
-            onClickTareaFinalizada(todo);
+            onClickTareaFinalizada(todo)
           }}
           className={todo.estado ? "tareaNoFinalizada" : "tareaFinalizada"}
         >
-          <BsCheck2All />
-        </div>
-        <div className="divTarea">
+          {cargandoTilde ? <div className="cargandoCheck"></div> : <BsCheck2All /> }
+          </div>
+        <div className={todo.estado ? "lista"  : "listaTachada" }>
           <h4 className="tituloLista" maxLength="40">
             {todo.titulo}
           </h4>
-          <p className="descripcionLista"> {todo.descripcion}</p>
+          <p className= "descripcionLista"> {todo.descripcion}</p>
         </div>
         <div>
           <AiOutlineEdit
