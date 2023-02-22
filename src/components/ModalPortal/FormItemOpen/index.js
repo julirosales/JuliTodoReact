@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { ButtonModal } from "../ButtonModal";
 import "../FormItemOpen/Form.css";
 
@@ -12,12 +12,30 @@ function FormItem({
 }) {
   const tituloCapturado = useRef();
   const descripcionCapturada = useRef();
+  
+  const inicialForm={
+    titulo:"",
+    descripcion:""
+  }
+
+  const [formValidation,setFormValidation] = useState(inicialForm)
+  const [errorsValidation,setErrorsValidation]= useState({})
+
+  const onChangeForm=(e)=>{
+    const name = e.target.name
+    const value= e.target.value
+  setFormValidation({
+    ...formValidation,
+    [name]: value
+  })
+  }
 
   const onCargarNewItem = (e) => {
     e.preventDefault();
+  
     const valueTitulo = tituloCapturado.current.value;
     const valueDescripcion = descripcionCapturada.current.value;
-
+  
     const newItem = {
       titulo: valueTitulo,
       descripcion: valueDescripcion,
@@ -76,17 +94,22 @@ function FormItem({
           placeholder="Titulo"
           className="titulo"
           ref={tituloCapturado}
-          defaultValue={todoAEditar ? todoAEditar.titulo : ""}
+          defaultValue={todoAEditar ? todoAEditar.titulo : formValidation.titulo}
           maxLength="40"
           required={true}
           label="Filled"
           variant="filled"
+          name="titulo"
+          onChange={onChangeForm}
         />
         <textarea
           className="descripcion"
           placeholder="Descripcion"
           ref={descripcionCapturada}
-          defaultValue={todoAEditar ? todoAEditar.descripcion : ""}
+          defaultValue={todoAEditar ? todoAEditar.descripcion : formValidation.descripcion}
+
+          name="descripcion"
+          onChange={onChangeForm}
         ></textarea>
         <ButtonModal
           disabled={disabledButton}
@@ -94,6 +117,7 @@ function FormItem({
           className={"button-add"}
           text={todoAEditar ? "Editar" : "Agregar"}
           onClick={todoAEditar ? onUpdateItem : onCargarNewItem}
+          
         />
       </form>
     </React.Fragment>
