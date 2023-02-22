@@ -60,7 +60,7 @@ function FormItem({
       .then((data) => {
         setDisabledButton(false);
         cargarTodoManual(data);
-        console.log("DATA A GUARADR:", data);
+
         onClickClose();
       })
       .catch((err) => console.log(err));

@@ -11,7 +11,7 @@ import "../Loading/index.css";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [cargandoTilde,setCargandoTilde]=useState(false)
+  const [cargandoTilde, setCargandoTilde] = useState(false);
   const [arrayTodo, setArrayTodo] = useState([]);
   const [filteredTodos, setFilteredTodos] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -30,6 +30,7 @@ function App() {
       setOpenModalForm(true);
     }
   }, [todoAEditar]);
+
   useEffect(() => {
     if (todoAEliminar) {
       setOpenModalEliminar(true);
@@ -73,7 +74,7 @@ function App() {
     if (todoIndex > -1) {
       const arrTemp = [...arrayTodo];
       arrTemp.splice(todoIndex, 1, todo);
-      /*       console.log("ARRAY TEMP EN EDICOON", arrTemp); */
+/*       console.log("ARRAY TEMP EN EDICOON", arrTemp); */
       setArrayTodo(arrTemp);
     } else {
       const arrTemp = [...arrayTodo];
@@ -97,7 +98,6 @@ function App() {
     setTodoAEditar(null);
     setTodoAEliminar(null);
     setOpenModalEliminar(false);
-    /* setDisabledButton(false); */
   };
 
   return (
@@ -110,8 +110,8 @@ function App() {
       />
       {/* agrego en el boton mas el estado del modal para que cuando se haga click me cambie el estado a true y me habra el modal*/}
       <CreateButton setOpenModalForm={setOpenModalForm} />
-      <ListItems>
-        {loading && <div className="cargando"></div>}
+      <ListItems loading={loading}>
+        {/*  {loading && <div className="cargando"></div>} */}
         {todos.map((todo) => {
           return (
             <Items
@@ -122,7 +122,8 @@ function App() {
               setOpenModalEliminar={setOpenModalEliminar}
               url={url}
               cargarTodoManual={cargarTodoManual}
-              cargandoTilde={cargandoTilde}setCargandoTilde={setCargandoTilde}
+              cargandoTilde={cargandoTilde}
+              setCargandoTilde={setCargandoTilde}
             />
           );
         })}
