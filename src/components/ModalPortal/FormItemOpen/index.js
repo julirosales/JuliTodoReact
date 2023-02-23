@@ -42,7 +42,7 @@ function FormItem({
     if (Object.keys(errores).length > 0) {
       return errores;
     } else {
-      return;
+      return (errores = {});
     }
   };
 
@@ -52,61 +52,62 @@ function FormItem({
 
   const onCargarNewItem = (e) => {
     e.preventDefault();
-    /*  const errores = errorsValidation; */
-    if (errorsValidation) {
-      setMostrarErrors(true);
-      alert("tengo qe mostrar errores");
-    } else {
+    if (!Object.keys(errorsValidation).length > 0) {
       setMostrarErrors(false);
-      alert("envio formulario");
-    }
-    /* console.log("errores?", errorsValidation); */
-
-    /* const newItem = {
-      ...formValidation,
-      estado: false,
-      id: Date.now(),
-    };
-    setDisabledButton(true);
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(newItem),
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setDisabledButton(false);
-        cargarTodoManual(data);
-        onClickClose();
+      const newItem = {
+        ...formValidation,
+        estado: false,
+        id: Date.now(),
+      };
+      setDisabledButton(true);
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(newItem),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
       })
-      .catch((err) => console.log(err)); */
+        .then((response) => response.json())
+        .then((data) => {
+          setDisabledButton(false);
+          cargarTodoManual(data);
+          onClickClose();
+        })
+        .catch((err) => console.log(err));
+      /*  console.log("sin errores?", !Object.keys(errorsValidation).length > 0); */
+    } else {
+      /*  console.log("tiene errores?", Object.keys(errorsValidation).length > 0); */
+      setMostrarErrors(true);
+    }
   };
 
   const onUpdateItem = (e) => {
     e.preventDefault();
-    const valueTitulo = tituloCapturado.current.value;
-    const valueDescripcion = descripcionCapturada.current.value;
+    if (!Object.keys(errorsValidation).length > 0) {
+      const valueTitulo = tituloCapturado.current.value;
+      const valueDescripcion = descripcionCapturada.current.value;
 
-    const newItem = {
-      ...todoAEditar,
-      titulo: valueTitulo,
-      descripcion: valueDescripcion,
-    };
-    console.log("TODO A EDITAR: ", todoAEditar);
-    setDisabledButton(true);
-    fetch(`${url}/${todoAEditar.number}`, {
-      method: "PUT",
-      body: JSON.stringify(newItem),
-      headers: { "Content-type": "application/json; charset=UTF-8" },
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        setDisabledButton(false);
-        cargarTodoManual(data);
-
-        onClickClose();
+      const newItem = {
+        ...todoAEditar,
+        titulo: valueTitulo,
+        descripcion: valueDescripcion,
+      };
+      /*  console.log("TODO A EDITAR: ", todoAEditar); */
+      setDisabledButton(true);
+      fetch(`${url}/${todoAEditar.number}`, {
+        method: "PUT",
+        body: JSON.stringify(newItem),
+        headers: { "Content-type": "application/json; charset=UTF-8" },
       })
-      .catch((err) => console.log(err));
+        .then((response) => response.json())
+        .then((data) => {
+          setDisabledButton(false);
+          cargarTodoManual(data);
+
+          onClickClose();
+        })
+        .catch((err) => console.log(err));
+    } else {
+      setMostrarErrors(true);
+    }
   };
 
   return (
