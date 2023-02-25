@@ -14,8 +14,8 @@ function FormItem({
   const descripcionCapturada = useRef();
 
   const inicialForm = {
-    titulo: "",
-    descripcion: "",
+    titulo: todoAEditar ? todoAEditar.titulo : "",
+    descripcion: todoAEditar ? todoAEditar.descripcion : "",
   };
 
   const [formValidation, setFormValidation] = useState(inicialForm);
@@ -25,6 +25,7 @@ function FormItem({
   const onChangeForm = (e) => {
     const name = e.target.name;
     const value = e.target.value;
+
     setFormValidation({
       ...formValidation,
       [name]: value,
@@ -56,7 +57,7 @@ function FormItem({
       setMostrarErrors(false);
       const newItem = {
         ...formValidation,
-        estado: false,
+        estado: true,
         id: Date.now(),
       };
       setDisabledButton(true);
@@ -82,15 +83,12 @@ function FormItem({
   const onUpdateItem = (e) => {
     e.preventDefault();
     if (!Object.keys(errorsValidation).length > 0) {
-      const valueTitulo = tituloCapturado.current.value;
-      const valueDescripcion = descripcionCapturada.current.value;
-
       const newItem = {
         ...todoAEditar,
-        titulo: valueTitulo,
-        descripcion: valueDescripcion,
+        titulo: formValidation.titulo,
+        descripcion: formValidation.descripcion,
       };
-      /*  console.log("TODO A EDITAR: ", todoAEditar); */
+
       setDisabledButton(true);
       fetch(`${url}/${todoAEditar.number}`, {
         method: "PUT",
