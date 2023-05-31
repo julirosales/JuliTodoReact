@@ -1,6 +1,6 @@
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import { BsCheck2All } from "react-icons/bs";
-import { AiOutlineEdit/* , AiOutlineLoading */ } from "react-icons/ai";
+import { AiOutlineEdit /* , AiOutlineLoading */ } from "react-icons/ai";
 import { CiTrash } from "react-icons/ci";
 
 import "../Item/index.css";
@@ -11,10 +11,9 @@ function Items({
   setTodoAEliminar,
   setOpenModalEliminar,
   cargarTodoManual,
-  url,
-  cargandoTilde,setCargandoTilde
-
+  url
 }) {
+  const [cargandoTilde, setCargandoTilde] = useState(false);
   const onClickDelete = () => {
     setOpenModalEliminar((prevState) => !prevState);
   };
@@ -34,9 +33,8 @@ function Items({
       .then(setCargandoTilde(true))
       .then((response) => response.json())
       .then((data) => {
-        setCargandoTilde(false)
+        setCargandoTilde(false);
         cargarTodoManual(data);
-        
       })
       .catch((err) => console.log(err));
   };
@@ -47,17 +45,21 @@ function Items({
           ref={tildeCapturado}
           id={todo.id}
           onClick={() => {
-            onClickTareaFinalizada(todo)
+            onClickTareaFinalizada(todo);
           }}
           className={todo.estado ? "tareaNoFinalizada" : "tareaFinalizada"}
         >
-          {cargandoTilde ? <div className="cargandoCheck"></div> : <BsCheck2All /> }
-          </div>
-        <div className={todo.estado ? "lista"  : "listaTachada" }>
+          {cargandoTilde ? (
+            <div className="cargandoCheck"></div>
+          ) : (
+            <BsCheck2All />
+          )}
+        </div>
+        <div className={todo.estado ? "lista" : "listaTachada"}>
           <h4 className="tituloLista" maxLength="40">
             {todo.titulo}
           </h4>
-          <p className= "descripcionLista"> {todo.descripcion}</p>
+          <p className="descripcionLista"> {todo.descripcion}</p>
         </div>
         <div>
           <AiOutlineEdit
