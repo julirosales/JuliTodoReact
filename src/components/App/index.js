@@ -11,7 +11,6 @@ import "../Loading/index.css";
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [cargandoTilde, setCargandoTilde] = useState(false);
   const [arrayTodo, setArrayTodo] = useState([]);
   const [filteredTodos, setFilteredTodos] = useState([]);
   const [searchValue, setSearchValue] = useState("");
@@ -74,7 +73,7 @@ function App() {
     if (todoIndex > -1) {
       const arrTemp = [...arrayTodo];
       arrTemp.splice(todoIndex, 1, todo);
-/*       console.log("ARRAY TEMP EN EDICOON", arrTemp); */
+      /*       console.log("ARRAY TEMP EN EDICOON", arrTemp); */
       setArrayTodo(arrTemp);
     } else {
       const arrTemp = [...arrayTodo];
@@ -122,8 +121,6 @@ function App() {
               setOpenModalEliminar={setOpenModalEliminar}
               url={url}
               cargarTodoManual={cargarTodoManual}
-              cargandoTilde={cargandoTilde}
-              setCargandoTilde={setCargandoTilde}
             />
           );
         })}
