@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ButtonModal } from "../ButtonModal";
 import "../FormItemOpen/Form.css";
 
@@ -10,9 +10,6 @@ function FormItem({
   setDisabledButton,
   disabledButton,
 }) {
-  const tituloCapturado = useRef();
-  const descripcionCapturada = useRef();
-
   const inicialForm = {
     titulo: todoAEditar ? todoAEditar.titulo : "",
     descripcion: todoAEditar ? todoAEditar.descripcion : "",
@@ -117,7 +114,6 @@ function FormItem({
         <input
           placeholder="Titulo"
           className="titulo"
-          ref={tituloCapturado}
           defaultValue={
             todoAEditar ? todoAEditar.titulo : formValidation.titulo
           }
@@ -134,7 +130,6 @@ function FormItem({
         <textarea
           className="descripcion"
           placeholder="Descripcion"
-          ref={descripcionCapturada}
           defaultValue={
             todoAEditar ? todoAEditar.descripcion : formValidation.descripcion
           }
