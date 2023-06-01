@@ -26,6 +26,7 @@ function App({ count, totalTareasReaizadas }) {
   const todos = searchMode ? filteredTodos : arrayTodo;
   const url = "https://6348a6070b382d796c74f065.mockapi.io/api/v1/todos";
 
+  
   useEffect(() => {
     if (todoAEditar) {
       setOpenModalForm(true);
@@ -49,12 +50,10 @@ function App({ count, totalTareasReaizadas }) {
         .catch((error) => console.log(error));
     }, 1300);
   }, []);
-
-  /*   useEffect(() => {
-    const prueba = arrayTodo.filter((todo) => todo.estado === false);
-    console.log("arrayotods", prueba);
-    totalTareasReaizadas(prueba);
-  }, [arrayTodo]); */
+  const prueba = arrayTodo.filter((todo) => todo.estado === false);
+    useEffect(() => {
+    totalTareasReaizadas(prueba.length);
+  }, [arrayTodo]);
 
   //inicio la busqueda en el input de acuerdo a lo que escriba el usuario cambia el array y deja las que coinciden con el valor de search
   useEffect(() => {
@@ -111,8 +110,7 @@ function App({ count, totalTareasReaizadas }) {
     <React.Fragment>
       <h1 className="App-header">Todo List React</h1>
       <p className="contador-de-tareas">
-        tareas realizadas
-        {count} de {arrayTodo.length}
+        tareas realizadas {count} de {arrayTodo.length}
       </p>
       <Search
         searchValue={searchValue}
