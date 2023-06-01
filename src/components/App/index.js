@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { Search } from "../Search";
 import { CreateButton } from "../CreateButton";
-import { Items } from "../Item";
+import Items from "../Item";
 import { FormItem } from "../ModalPortal/FormItemOpen";
 import { ListItems } from "../ListItems";
 import { Modal } from "../ModalPortal";
 import { DeleteOpen } from "../ModalPortal/DeleteOpen";
 import "./App.css";
 import "../Loading/index.css";
+import { connect } from "react-redux";
+import { totalTareasReaizadas } from "../../actios";
 
-function App() {
+function App({ count, totalTareasReaizadas }) {
   const [loading, setLoading] = useState(true);
   const [arrayTodo, setArrayTodo] = useState([]);
   const [filteredTodos, setFilteredTodos] = useState([]);
@@ -47,6 +49,12 @@ function App() {
         .catch((error) => console.log(error));
     }, 1300);
   }, []);
+
+  /*   useEffect(() => {
+    const prueba = arrayTodo.filter((todo) => todo.estado === false);
+    console.log("arrayotods", prueba);
+    totalTareasReaizadas(prueba);
+  }, [arrayTodo]); */
 
   //inicio la busqueda en el input de acuerdo a lo que escriba el usuario cambia el array y deja las que coinciden con el valor de search
   useEffect(() => {
@@ -102,6 +110,10 @@ function App() {
   return (
     <React.Fragment>
       <h1 className="App-header">Todo List React</h1>
+      <p className="contador-de-tareas">
+        tareas realizadas
+        {count} de {arrayTodo.length}
+      </p>
       <Search
         searchValue={searchValue}
         setSearchValue={setSearchValue}
@@ -156,4 +168,13 @@ function App() {
   );
 }
 
-export default App;
+const mapStateeToProps = (state) => {
+  /* console.log("estadocreadoconRedux", state.toDos.countVerde); */
+  return {
+    count: state.toDos.countVerde,
+  };
+};
+const mapDispatchToProps = {
+  totalTareasReaizadas,
+};
+export default connect(mapStateeToProps, mapDispatchToProps)(App);

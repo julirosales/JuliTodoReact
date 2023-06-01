@@ -2,8 +2,12 @@ import React, { useRef, useState } from "react";
 import { BsCheck2All } from "react-icons/bs";
 import { AiOutlineEdit /* , AiOutlineLoading */ } from "react-icons/ai";
 import { CiTrash } from "react-icons/ci";
-
 import "../Item/index.css";
+import { connect } from "react-redux";
+import {
+  incrementarTareaRealizada,
+  decrementarTareaRealizada,
+} from "../../actios";
 
 function Items({
   todo,
@@ -11,7 +15,9 @@ function Items({
   setTodoAEliminar,
   setOpenModalEliminar,
   cargarTodoManual,
-  url
+  url,
+  incrementarTareaRealizada,
+  decrementarTareaRealizada,
 }) {
   const [cargandoTilde, setCargandoTilde] = useState(false);
   const onClickDelete = () => {
@@ -24,7 +30,11 @@ function Items({
       ...todo,
       estado: !todo.estado,
     };
-
+    if (todo.estado) {
+      incrementarTareaRealizada(1);
+    } else {
+      decrementarTareaRealizada(1);
+    }
     fetch(`${url}/${todo.number}`, {
       method: "PUT",
       body: JSON.stringify(newItem),
@@ -79,4 +89,8 @@ function Items({
   );
 }
 
-export { Items };
+const mapsDispatchToProps = {
+  incrementarTareaRealizada,
+  decrementarTareaRealizada,
+};
+export default connect(null, mapsDispatchToProps)(Items);

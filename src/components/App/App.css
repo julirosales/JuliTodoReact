@@ -49,4 +49,7 @@ h1{
 }
 
 
- 
+.contador-de-tareas{
+  display:flex;
+  justify-content:center;
+}
