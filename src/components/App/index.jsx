@@ -53,6 +53,7 @@ function App({ count, totalTareasReaizadas }) {
   const prueba = arrayTodo.filter((todo) => todo.estado === false);
     useEffect(() => {
     totalTareasReaizadas(prueba.length);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arrayTodo]);
 
   //inicio la busqueda en el input de acuerdo a lo que escriba el usuario cambia el array y deja las que coinciden con el valor de search
