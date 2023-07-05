@@ -6,10 +6,10 @@ import { FormItem } from "../ModalPortal/FormItemOpen";
 import { ListItems } from "../ListItems";
 import { Modal } from "../ModalPortal";
 import { DeleteOpen } from "../ModalPortal/DeleteOpen";
-import "./App.css";
+import { ContadorTareas, Titulo } from "./styled.js";
 import "../Loading/index.css";
 import { connect } from "react-redux";
-import { totalTareasReaizadas } from "../../actios";
+import { totalTareasReaizadas } from "../../redux/actios";
 
 function App({ count, totalTareasReaizadas }) {
   const [loading, setLoading] = useState(true);
@@ -26,7 +26,6 @@ function App({ count, totalTareasReaizadas }) {
   const todos = searchMode ? filteredTodos : arrayTodo;
   const url = "https://6348a6070b382d796c74f065.mockapi.io/api/v1/todos";
 
-  
   useEffect(() => {
     if (todoAEditar) {
       setOpenModalForm(true);
@@ -51,9 +50,9 @@ function App({ count, totalTareasReaizadas }) {
     }, 1300);
   }, []);
   const prueba = arrayTodo.filter((todo) => todo.estado === false);
-    useEffect(() => {
+  useEffect(() => {
     totalTareasReaizadas(prueba.length);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [arrayTodo]);
 
   //inicio la busqueda en el input de acuerdo a lo que escriba el usuario cambia el array y deja las que coinciden con el valor de search
@@ -109,10 +108,10 @@ function App({ count, totalTareasReaizadas }) {
 
   return (
     <React.Fragment>
-      <h1 className="App-header">Todo List React</h1>
-      <p className="contador-de-tareas">
+      <Titulo>Todo List React</Titulo>
+      <ContadorTareas>
         tareas realizadas {count} de {arrayTodo.length}
-      </p>
+      </ContadorTareas>
       <Search
         searchValue={searchValue}
         setSearchValue={setSearchValue}
