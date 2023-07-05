@@ -5,14 +5,12 @@ const initialState = {
 const toDosReducer = (state = initialState, action) => {
   switch (action.type) {
     case "TILDE_VERDE":
-      console.log("estado en switch verde", state);
       return {
         ...state,
         //actualizo el estado que quiero
         countVerde: state.countVerde + action.payload,
       };
     case "TILDE_GRIS":
-      console.log("estado en switch gris", state);
       return {
         ...state,
         countVerde:
