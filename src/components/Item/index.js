@@ -2,12 +2,21 @@ import React, { useRef, useState } from "react";
 import { BsCheck2All } from "react-icons/bs";
 import { AiOutlineEdit /* , AiOutlineLoading */ } from "react-icons/ai";
 import { CiTrash } from "react-icons/ci";
-import "../Item/index.css";
 import { connect } from "react-redux";
 import {
   incrementarTareaRealizada,
   decrementarTareaRealizada,
-} from "../../actios";
+} from "../../redux/actios/index.js";
+import {
+  ContainerTarea,
+  CargandoCheck,
+  TituloLista,
+  DescriptionLista,
+  ButtonGeneral,
+  ContainerBtns,
+  CointenerListAlter,
+  Tarea,
+} from "./styled.js";
 
 function Items({
   todo,
@@ -50,41 +59,35 @@ function Items({
   };
   return (
     <React.Fragment>
-      <div className="container-tarea">
-        <div
+      <ContainerTarea>
+        <Tarea
           ref={tildeCapturado}
           id={todo.id}
           onClick={() => {
             onClickTareaFinalizada(todo);
           }}
-          className={todo.estado ? "tareaNoFinalizada" : "tareaFinalizada"}
+          estado={todo.estado}
         >
-          {cargandoTilde ? (
-            <div className="cargandoCheck"></div>
-          ) : (
-            <BsCheck2All />
-          )}
-        </div>
-        <div className={todo.estado ? "lista" : "listaTachada"}>
-          <h4 className="tituloLista" maxLength="40">
-            {todo.titulo}
-          </h4>
-          <p className="descripcionLista"> {todo.descripcion}</p>
-        </div>
-        <div>
-          <AiOutlineEdit
-            className="btnEdit"
-            onClick={() => setTodoAEditar(todo)}
-          />
-          <CiTrash
-            className="btnBorrar"
+          {cargandoTilde ? <CargandoCheck></CargandoCheck> : <BsCheck2All />}
+        </Tarea>
+        <CointenerListAlter estado={todo.estado}>
+          <TituloLista>{todo.titulo}</TituloLista>
+          <DescriptionLista> {todo.descripcion}</DescriptionLista>
+        </CointenerListAlter>
+        <ContainerBtns>
+          <ButtonGeneral onClick={() => setTodoAEditar(todo)}>
+            <AiOutlineEdit />
+          </ButtonGeneral>
+          <ButtonGeneral
             onClick={() => {
               setTodoAEliminar(todo);
               onClickDelete();
             }}
-          />
-        </div>
-      </div>
+          >
+            <CiTrash />
+          </ButtonGeneral>
+        </ContainerBtns>
+      </ContainerTarea>
     </React.Fragment>
   );
 }

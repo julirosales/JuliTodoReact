@@ -1,7 +1,7 @@
 import React from "react";
 import { ButtonModal } from "../ButtonModal";
-import "./index.css";
 import "../../Loading/index.css";
+import { FormDeleteItem, Text } from "./styled";
 
 function DeleteOpen({
   url,
@@ -29,18 +29,16 @@ function DeleteOpen({
   };
   return (
     <>
-      <form className="form-delete-item">
-        <p>Estas Seguro que deseas eliminar la tarea :</p>
-        <p className="text-delete">{todoAEliminar.titulo}</p>
-
+      <FormDeleteItem>
+        <Text>Estas Seguro que deseas eliminar la tarea :</Text>
+        <Text>{todoAEliminar.titulo}</Text>
         <ButtonModal
           disabled={disabledButton}
           type={"submit"}
           onClick={onDeleteItem}
           text={"ELIMINAR"}
-          className={"button-delete"}
         ></ButtonModal>
-      </form>
+      </FormDeleteItem>
     </>
   );
 }

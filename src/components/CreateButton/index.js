@@ -1,6 +1,6 @@
 import React from "react";
 import { BiListPlus } from "react-icons/bi";
-import "./CreateButton.css";
+import { ButtonConteiner, ButtonCreate } from "./styled";
 
 function CreateButton(props) {
   const onClickButtonAdd = () => {
@@ -8,9 +8,11 @@ function CreateButton(props) {
   };
   return (
     <React.Fragment>
-      <div className="ContainerButtonCreate">
-        <BiListPlus className="buttonCreate" onClick={onClickButtonAdd} />
-      </div>
+      <ButtonConteiner>
+        <ButtonCreate onClick={onClickButtonAdd}>
+          <BiListPlus />
+        </ButtonCreate>
+      </ButtonConteiner>
     </React.Fragment>
   );
 }

@@ -1,7 +1,13 @@
 import React, { Fragment } from "react";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { MdOutlineClear } from "react-icons/md";
-import "./Search.css";
+import {
+  ContainerForm,
+  Buscador,
+  IconInInput,
+  BuscadorBarra,
+  NotResult,
+} from "./styled.js";
 
 function Search({ searchValue, setSearchValue, notResult }) {
   /*   //buscadorrrr searchValu
@@ -28,36 +34,32 @@ function Search({ searchValue, setSearchValue, notResult }) {
 
   return (
     <Fragment>
-      <form id="containerForm" onSubmit={onEnviar}>
-        <div id="buscador">
-          <input
+      <ContainerForm onSubmit={onEnviar}>
+        <Buscador>
+          <BuscadorBarra
             type="text"
-            className="buscadorBarra"
             placeholder="Buscador"
-            /*  name="buscador" */
             required
             minLength="1"
             value={searchValue}
             onChange={onSearchValueChange}
           />
-          {!searchValue.length ? (
-            <BiSearchAlt2 className="iconBuscar" id="iconBuscar" />
-          ) : (
-            <MdOutlineClear
-              className="iconBorrar"
-              id="iconBorrar"
-              onClick={onCloseBusqueda}
-            />
-          )}
-        </div>
+          <IconInInput>
+            {!searchValue.length ? (
+              <BiSearchAlt2  />
+            ) : (
+              <MdOutlineClear onClick={onCloseBusqueda} />
+            )}
+          </IconInInput>
+        </Buscador>
         {notResult ? (
-          <p id="notResult">
+          <NotResult>
             No se encontraron resultados para: "{searchValue}"
-          </p>
+          </NotResult>
         ) : (
           <></>
         )}
-      </form>
+      </ContainerForm>
     </Fragment>
   );
 }

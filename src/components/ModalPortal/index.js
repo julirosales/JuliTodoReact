@@ -1,22 +1,22 @@
 import ReactDOM from "react-dom";
-import "./Modal.css";
 import { MdOutlineClear } from "react-icons/md";
+import { ModalCaja,ModalClose,ModalContainer } from "./styled";
 
 function Modal({ children, onClickClose }) {
   //en reactDom Portal le podemos enviar todo lo que querramos y como segundo parametros que es el nodo de html donde vamos a mandar a nuestro hijo de nuestro modal
   return ReactDOM.createPortal(
-    <div className="modal-container">
-      <div className="modal-caja">
-        <div className="modal-close">
+    <ModalContainer>
+      <ModalCaja>
+        <ModalClose>
           <MdOutlineClear
             className="iconClose"
             id="creadodesdemodal"
             onClick={onClickClose}
           />
-        </div>
+        </ModalClose>
         {children}
-      </div>
-    </div>,
+      </ModalCaja>
+    </ModalContainer>,
     document.getElementById("modal")
   );
 }

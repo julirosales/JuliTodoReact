@@ -1,6 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { ButtonModal } from "../ButtonModal";
-import "../FormItemOpen/Form.css";
+import {
+  Titulo,
+  FormTodo,
+  BoxDescripcion,
+  TituloCaja,
+  ErrorTitulo,
+} from "./styled";
 
 function FormItem({
   cargarTodoManual,
@@ -107,13 +113,10 @@ function FormItem({
 
   return (
     <React.Fragment>
-      <form className="container-caja-todo">
-        <p className="titulo-caja">
-          {todoAEditar ? "Editar Tarea" : "Nueva Tarea"}
-        </p>
-        <input
+      <FormTodo>
+        <TituloCaja>{todoAEditar ? "Editar Tarea" : "Nueva Tarea"}</TituloCaja>
+        <Titulo
           placeholder="Titulo"
-          className="titulo"
           defaultValue={
             todoAEditar ? todoAEditar.titulo : formValidation.titulo
           }
@@ -124,29 +127,25 @@ function FormItem({
           name="titulo"
           onChange={onChangeForm}
         />
-        {mostrarErrores && (
-          <p className="errorTitulo">{errorsValidation.titulo}</p>
-        )}
-        <textarea
-          className="descripcion"
+        {mostrarErrores && <ErrorTitulo>{errorsValidation.titulo}</ErrorTitulo>}
+        <BoxDescripcion
           placeholder="Descripcion"
           defaultValue={
             todoAEditar ? todoAEditar.descripcion : formValidation.descripcion
           }
           name="descripcion"
           onChange={onChangeForm}
-        ></textarea>
+        ></BoxDescripcion>
         {mostrarErrores && (
-          <p className="errorTitulo">{errorsValidation.descripcion}</p>
+          <ErrorTitulo>{errorsValidation.descripcion}</ErrorTitulo>
         )}
         <ButtonModal
           disabled={disabledButton}
           submit={"submit"}
-          className={"button-add"}
           text={todoAEditar ? "Editar" : "Agregar"}
           onClick={todoAEditar ? onUpdateItem : onCargarNewItem}
         />
-      </form>
+      </FormTodo>
     </React.Fragment>
   );
 }

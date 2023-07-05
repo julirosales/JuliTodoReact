@@ -1,16 +1,15 @@
-import "./index.css";
+import { BtnModal } from "./styled.js";
 
-function ButtonModal({ text, className, onClick, disabled, type }) {
+function ButtonModal({ text, onClick, disabled, type }) {
   return (
     <>
-      <button
+      <BtnModal
         type={type}
-        className={className}
         onClick={onClick}
         disabled={disabled}
       >
         {text}
-      </button>
+      </BtnModal>
     </>
   );
 }
